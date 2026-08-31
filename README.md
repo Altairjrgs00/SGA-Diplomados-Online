@@ -12,3 +12,6 @@ Separé el repositorio en cuatro carpetas para mantener cada entrega ordenada:
 *   **`/Python`**: Aquí está el prototipo funcional actual (Fase 4) que guarda todo en archivos `.txt`.
 *   **`/Java`**: Espacio listo para cuando nos toque hacer la migración a Java.
 *   **`/Cpp`**: Carpeta reservada para la optimización final del código en C++.
+
+
+**Estudiante:** Jose Gambarini 
