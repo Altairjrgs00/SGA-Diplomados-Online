@@ -1,7 +1,7 @@
 import os
 
 # =====================================================================
-# 1. ARQUITECTURA DE CLASES (MODELADO DEL UML)
+# 1. ARQUITECTURA DE CLASES (MODELADO DEL UML. Herencia Y Reglas)
 # =====================================================================
 
 class Persona:
@@ -26,7 +26,7 @@ class Alumno(Persona):
         self._notas.append(float(nota))
 
     def borrar_ultima_nota(self):
-        # Lógica de Pila: si hay notas guardadas, saca la última que entró
+        # Lógica de Pila: si hay notas guardadas, saca la última nota ingresada
         if self._notas:
             return self._notas.pop()         
         return None
