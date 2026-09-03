@@ -67,7 +67,7 @@ class Profesor(Persona):
 
 
 # =====================================================================
-# 2. MOTOR DEL SISTEMA (PERSISTENCIA DE ARCHIVOS TXT)
+# 2. FUNCIONES GLOBALES (PERSISTENCIA DE ARCHIVOS TXT)
 # =====================================================================
 
 class GestorAcademico:
