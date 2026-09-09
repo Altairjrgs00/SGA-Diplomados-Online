@@ -199,7 +199,7 @@ def ejecutar_sistema():
             cedula = input("Ingrese la Cédula del Alumno: ")
             if cedula in gestor.alumnos:
                 alu = gestor.alumnos[cedula]
-                condicion = "APROBADO" if alu.chequear_aprobacion() else "REPROBADO / EN CURSO"
+                condicion = "APROBADO" if alu.chequear_aprobacion() else "REPROBADO"
                 print(f"\n--- REPORTE ACADÉMICO: {alu._nombre.upper()} ---")
                 print(f"Programa: {alu._tipo_programa}")
                 print(f"Historial de Notas: {alu._notas}")
@@ -209,8 +209,15 @@ def ejecutar_sistema():
                 print("\n[Error] El estudiante no se encuentra registrado.")
 
         elif opcion == 6:
+            print("\n--- REPORTE GENERAL DE ALUMNOS ---")
+            if not gestor.alumnos:
+                print("No hay alumnos registrados.")
+            else:
+                for alu in gestor.alumnos.values():
+                    estado = "APROBADO" if alu.chequear_aprobacion() else "REPROBADO"
+                    print(f"{alu.mostrar_datos()} | Programa: {alu._tipo_programa} | Promedio: {alu.sacar_promedio():.2f} | Estado: {estado}")
             gestor.generar_reporte_graduados()
-            print("\n¡Reporte Procesado! Se generó el archivo 'certificados_pendientes.txt' con los graduados.")
+            input("\nPresione Enter para continuar...")
 
         elif opcion == 7:
             print("\nGuardando estados finales... ¡Operación finalizada con éxito!")
