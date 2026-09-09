@@ -13,5 +13,5 @@ public class Profesor extends Persona {
     // Usamos Getter para leer la materia desde afuera
     public String getMateria() {
         return this.materia;
-    }
+    } 
 }
