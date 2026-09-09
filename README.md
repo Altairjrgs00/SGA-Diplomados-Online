@@ -9,8 +9,8 @@ Este es mi proyecto final para el diplomado de programación de la UCV. El siste
 Separé el repositorio en cuatro carpetas para mantener cada entrega ordenada:
 
 *   **`/Docs`**: Aquí guardo mis informes en PDF y el Diagrama de Clases UML.
-*   **`/Python`**: Prototipo funcional del programa en lenguaje Python que guarda todo en archivos `.txt`.
-*   **`/Java`**: avances del código migrado a Java.
+*   **`/Python`**: Codigo funcional del programa en lenguaje Python que guarda todo en archivos `.txt`.
+*   **`/Java`**: Código migrado a Java.
 *   **`/Cpp`**: Carpeta reservada para la optimización final del código en C++.
 
 
