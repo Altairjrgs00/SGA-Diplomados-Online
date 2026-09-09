@@ -1,0 +1,4 @@
+V-101;Ana Silva;ana@email.com;Curso;10.0,10.0,10.0
+V-202;Carlos Perez;Carlos@email.com;Diplomado;14.0,14.0,13.0
+V-303;Maria Gómez;Maria@email.com;Bootcamp;20.0,20.0,13.0
+V-404;Luis Rojas;Luis@email.com;Bootcamp;14.0,15.0,14.0

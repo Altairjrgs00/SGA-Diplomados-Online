@@ -228,5 +228,3 @@ def ejecutar_sistema():
 # Version Terminada
 if __name__ == "__main__":
     ejecutar_sistema()
-
-
