@@ -96,7 +96,9 @@ public class Main {
 
                     case 5:
                         System.out.println("\nGenerar cola de certificados\n");
-                        gestor.generarColaDeCertificados();
+                        System.out.print("Ingrese la Cedula del Alumno a consultar (ej: V-101): ");
+                        String cedula = teclado.nextLine();
+                        gestor.generarColaCertificadosConBusqueda(cedula);
                         System.out.print("Presione Enter para continuar...");
                         teclado.nextLine();
                         break;

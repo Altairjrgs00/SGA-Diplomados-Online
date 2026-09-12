@@ -52,7 +52,7 @@ public class GestorAcademico {
             al.agregarNota(nota);
             this.historialNotas.push(al); //Agregamos el alumno a la pila de historial de notas
             System.out.println("Nota " + nota + " registrada exitosamente para el alumno: " + al.getNombre());
-            System.out.println("Promedio Actual de " + al.calcularPromedio() + " | Estatus " + al.chequearEstatus());
+
             this.guardarAlumnosEnArchivo(); // Guardar datos en el archivo después de registrar una nota
         } else {
             System.out.println("Error: no se encontro ningun alumno que coincida con la cédula: " + cedulaAlumno);
@@ -168,8 +168,16 @@ public class GestorAcademico {
         }
         System.out.println();
     }
+
     //Generar la cola de certificados para los alumnos que han aprobado el curso
-    public void generarColaDeCertificados() {
+    public void generarColaCertificadosConBusqueda(String cedula) {
+        Alumno alumnoConsultado = this.mapaAlumnos.get(cedula);
+        if (alumnoConsultado != null) {
+            System.out.println("\nAlumno: " + alumnoConsultado.getNombre() +
+                               "  Notas registradas: " + alumnoConsultado.getNotas());
+        } else {
+            System.out.println("No se encontró ningún alumno con la cédula: " + cedula);
+        }
         this.colaCertificados.clear(); // Limpiamos la cola antes de generar una nueva
         for (Alumno al : this.mapaAlumnos.values()) {
             if (al.chequearEstatus().equals("Aprobado")) {
@@ -177,7 +185,7 @@ public class GestorAcademico {
             }
         }
 
-        System.out.println("Generando cola de certificados para los alumnos aprobados...");
+        System.out.println("\nGenerando cola de certificados para los alumnos aprobados...");
         System.out.println("Total de alumnos en cola: " + this.colaCertificados.size());
 
         // Para exportar el reporte a un archivo de texto
@@ -190,8 +198,7 @@ public class GestorAcademico {
             int contador = 1;
             while (!this.colaCertificados.isEmpty()) {
                 Alumno graduado = this.colaCertificados.poll(); // Sacamos el primer alumno de la cola
-                System.out.println(contador + ". [" + graduado.getCedula() + "] " + graduado.getNombre());
-            
+                            
                 reporte.write(contador + ". [" + graduado.getCedula() + "] " + graduado.getNombre() + "\n");
                 reporte.write("   - Programa: " + graduado.getTipoPrograma() + "\n");
                 reporte.write("   - Promedio Final: " + graduado.calcularPromedio() + "\n");
@@ -199,8 +206,8 @@ public class GestorAcademico {
                 contador++;
             }
             reporte.write("=============================================\n");
-            reporte.write("* Fin del reporte - Generado por SGA-DO *\n");
-            System.out.println("Reporte guardado con exito en certificados_pendientes.txt");
+            reporte.write("*             Fin del reporte               *\n");
+            reporte.write("=============================================\n");
         } catch (IOException e) {
             System.out.println("Error al exportar certificados: " + e.getMessage());
         }

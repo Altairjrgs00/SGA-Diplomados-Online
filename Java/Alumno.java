@@ -17,7 +17,7 @@ public class Alumno extends Persona {
 
     // Hacemos un metodo para agregar una nota (con limite de 3 notas)
     public void agregarNota(double nota) {
-        if (this.notas.size() < 3) { // Limite de 3 notas
+        if (this.notas.size() < 4) { // Limite de notas
             this.notas.add(nota);
         }
     }
