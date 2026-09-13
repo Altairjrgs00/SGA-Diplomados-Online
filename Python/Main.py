@@ -14,7 +14,6 @@ class Persona:
     def mostrar_datos(self):
         return f"Cédula: {self._cedula} | Nombre: {self._nombre} | Correo: {self._correo}"
 
-
 class Alumno(Persona):
     def __init__(self, cedula, nombre, correo, tipo_programa):
         # Con super() traemos los datos del padre Persona para no repetir código
@@ -59,12 +58,10 @@ class Alumno(Persona):
             
         return False
 
-
 class Profesor(Persona):
     def __init__(self, cedula, nombre, correo, materia):
         super().__init__(cedula, nombre, correo)
         self._materia = str(materia)
-
 
 # =====================================================================
 # 2. FUNCIONES GLOBALES (PERSISTENCIA DE ARCHIVOS TXT)
