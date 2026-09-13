@@ -80,20 +80,20 @@ class GestorAcademico:
 
     def guardar_datos(self):
         # Guardamos alumnos en el archivo txt separando los datos con punto y coma
-        with open("alumnos.txt", "w", encoding="utf-8") as f:
+        with open("python/alumnos.txt", "w", encoding="utf-8") as f:
             for alu in self.alumnos.values():
                 notas_str = ",".join(map(str, alu._notas))
                 f.write(f"{alu._cedula};{alu._nombre};{alu._correo};{alu._tipo_programa};{notas_str}\n")
         
         # Guardamos profesores en su propio bloc de notas
-        with open("profesores.txt", "w", encoding="utf-8") as f:
+        with open("python/profesores.txt", "w", encoding="utf-8") as f:
             for prof in self.profesores.values():
                 f.write(f"{prof._cedula};{prof._nombre};{prof._correo};{prof._materia}\n")
 
     def cargar_datos(self):
         # Si el archivo existe en la computadora, recuperamos los alumnos guardados
-        if os.path.exists("alumnos.txt"):
-            with open("alumnos.txt", "r", encoding="utf-8") as f:
+        if os.path.exists("python/alumnos.txt"):
+            with open("python/alumnos.txt", "r", encoding="utf-8") as f:
                 for linea in f:
                     partes = linea.strip().split(";")
                     if len(partes) >= 4:
@@ -105,17 +105,45 @@ class GestorAcademico:
                         self.alumnos[cedula] = alu
 
         # Si el archivo existe, recuperamos los profesores guardados
-        if os.path.exists("profesores.txt"):
-            with open("profesores.txt", "r", encoding="utf-8") as f:
+        if os.path.exists("python/profesores.txt"):
+            with open("python/profesores.txt", "r", encoding="utf-8") as f:
                 for linea in f:
                     partes = linea.strip().split(";")
                     if len(partes) == 4:
                         cedula, nombre, correo, materia = partes[0], partes[1], partes[2], partes[3]
                         self.profesores[cedula] = Profesor(cedula, nombre, correo, materia)
 
+    def generar_cola_certificados(self):
+        cola_certificados = []
+        for alu in self.alumnos.values():
+            if alu.chequear_aprobacion():
+                cola_certificados.append(alu)
+                
+        print("\n--- PROCESANDO COLA DE CERTIFICADOS ---")
+        print(f"\nTotal de graduandos en cola: {len(cola_certificados)}")
+        
+        with open("python/certificados_pendientes.txt", "w", encoding="utf-8") as f:
+            f.write("=========================================\n")
+            f.write("    REPORTE DE CERTIFICADOS PENDIENTES   \n")
+            f.write("=========================================\n")
+            f.write(f"Total de graduandos en cola: {len(cola_certificados)}\n\n")
+            
+            contador = 1
+            while cola_certificados:
+                graduando = cola_certificados.pop(0)
+                                
+                f.write(f"{contador}. [{graduando._cedula}] {graduando._nombre}\n")
+                f.write(f"   - Programa: {graduando._tipo_programa}\n")
+                f.write(f"   - Promedio Final: {graduando.sacar_promedio():.1f}\n")
+                f.write("   - Estatus: APROBADO\n\n")
+                contador += 1
+                
+            f.write("=========================================\n")
+            f.write("*            Fin Del Reporte            *\n")
+       
     def generar_reporte_graduados(self):
         # Recorremos la cola de alumnos y escribimos a los aprobados en certificados_pendientes.txt
-        with open("certificados_pendientes.txt", "w", encoding="utf-8") as f:
+        with open("python/certificados_pendientes.txt", "w", encoding="utf-8") as f:
             for alu in self.alumnos.values():
                 if alu.chequear_aprobacion():
                     f.write(f"GRADUADO: {alu._nombre} ({alu._cedula}) | Programa: {alu._tipo_programa} | Promedio: {alu.sacar_promedio():.2f}\n")
@@ -196,18 +224,10 @@ def ejecutar_sistema():
                 print("\nNo existen modificaciones de notas en esta sesión para deshacer.")
 
         elif opcion == 5:
-            cedula = input("Ingrese la Cédula del Alumno: ")
-            if cedula in gestor.alumnos:
-                alu = gestor.alumnos[cedula]
-                condicion = "APROBADO" if alu.chequear_aprobacion() else "REPROBADO"
-                print(f"\n--- REPORTE ACADÉMICO: {alu._nombre.upper()} ---")
-                print(f"Programa: {alu._tipo_programa}")
-                print(f"Historial de Notas: {alu._notas}")
-                print(f"Promedio Obtenido: {alu.sacar_promedio():.2f}")
-                print(f"Estado de Certificación: {condicion}")
-            else:
-                print("\n[Error] El estudiante no se encuentra registrado.")
-
+                gestor.generar_cola_certificados()
+                print("\n¡Cola de certificados generada y respaldada en 'certificados_pendientes.txt' con éxito!")
+                input("\nPresione Enter para continuar...")
+           
         elif opcion == 6:
             print("\n--- REPORTE GENERAL DE ALUMNOS ---")
             if not gestor.alumnos:
