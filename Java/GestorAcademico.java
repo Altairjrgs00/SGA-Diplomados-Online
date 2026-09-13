@@ -170,23 +170,15 @@ public class GestorAcademico {
     }
 
     //Generar la cola de certificados para los alumnos que han aprobado el curso
-    public void generarColaCertificadosConBusqueda(String cedula) {
-        Alumno alumnoConsultado = this.mapaAlumnos.get(cedula);
-        if (alumnoConsultado != null) {
-            System.out.println("\nAlumno: " + alumnoConsultado.getNombre() +
-                               "  Notas registradas: " + alumnoConsultado.getNotas());
-        } else {
-            System.out.println("No se encontró ningún alumno con la cédula: " + cedula);
-        }
+    public void generarColaCertificados() {
         this.colaCertificados.clear(); // Limpiamos la cola antes de generar una nueva
         for (Alumno al : this.mapaAlumnos.values()) {
             if (al.chequearEstatus().equals("Aprobado")) {
                 this.colaCertificados.add(al);
             }
         }
-
-        System.out.println("\nGenerando cola de certificados para los alumnos aprobados...");
-        System.out.println("Total de alumnos en cola: " + this.colaCertificados.size());
+        System.out.println("Cola de certificados Generada para los alumnos aprobados...");
+        System.out.println("\nTotal de alumnos en cola: " + this.colaCertificados.size());
 
         // Para exportar el reporte a un archivo de texto
         try (FileWriter reporte = new FileWriter("Java/certificados_pendientes.txt")) {
