@@ -204,6 +204,6 @@ public class GestorAcademico {
             System.out.println("Error al exportar certificados: " + e.getMessage());
         }
         
-        System.out.println("===================================================================");
+        System.out.println("==================================================================");
     }
 }    
