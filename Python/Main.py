@@ -226,13 +226,25 @@ def ejecutar_sistema():
                 input("\nPresione Enter para continuar...")
            
         elif opcion == 6:
-            print("\n--- REPORTE GENERAL DE ALUMNOS ---")
+            print("==========================================")
+            print("\n       ---   REPORTE GENERAL   ---      ")   
+            print("==========================================")
+
+            print("\n--- LISTA DE ALUMNOS APROBADOS ---")
             if not gestor.alumnos:
                 print("No hay alumnos registrados.")
             else:
                 for alu in gestor.alumnos.values():
                     estado = "APROBADO" if alu.chequear_aprobacion() else "REPROBADO"
-                    print(f"{alu.mostrar_datos()} | Programa: {alu._tipo_programa} | Promedio: {alu.sacar_promedio():.2f} | Estado: {estado}")
+                    print(f"{alu.mostrar_datos()}  |  Programa: {alu._tipo_programa}  |  Promedio: {alu.sacar_promedio():.2f}  |  Estado: {estado}")
+
+            print("\n--- LISTA DE PROFESORES REGISTRADOS ---")
+            if not gestor.profesores:
+                print("No hay profesores registrados en el sistema.")
+            else:
+                for prof in gestor.profesores.values():
+                    print(f"-   [{prof._cedula}]    {prof._nombre}  |  Especialidad: {prof._materia}")
+
             gestor.generar_reporte_graduados()
             input("\nPresione Enter para continuar...")
 
@@ -242,6 +254,5 @@ def ejecutar_sistema():
         else:
             print("\nOpción fuera de rango. Seleccione del 1 al 7.")
 
-# Version Terminada
 if __name__ == "__main__":
     ejecutar_sistema()
