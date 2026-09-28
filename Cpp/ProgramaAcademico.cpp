@@ -1,5 +1,8 @@
 #include "ProgramaAcademico.h"
 
+ProgramaAcademico::~ProgramaAcademico() {
+}
+
 // Regla del Curso: Promedio >= 10
 bool Curso::evaluarAprobacion(float nota1, float nota2, float nota3) {
     float promedio = (nota1 + nota2 + nota3) / 3.0f;

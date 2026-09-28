@@ -1,35 +1,32 @@
 #ifndef ALUMNO_H
 #define ALUMNO_H
 
-#include <string>
+#include "Persona.h"
+#include "ProgramaAcademico.h"
+#include <vector>
 
-class Alumno {
+class Alumno : public Persona {
 private:
-    std::string cedula;
-    std::string nombre;
-    double notas[3];       // Espacio para un maximo de 3 notas (evaluaciones)
-    int cantidadNotas;     // Controla cuantas notas reales tiene registradas (0 a 3)
+    ProgramaAcademico* programa; 
+    std::vector<float> notas;    // Usamos vector para manejar fácilmente la lista de notas
 
 public:
-    // Constructor vacio
-    Alumno();
+    // Constructor
+    Alumno(std::string _cedula, std::string _nombre, std::string _correo, ProgramaAcademico* _programa);
+    
+        ~Alumno() override;
 
-    // Constructor para registrar un alumno con sus datos basicos
-    Alumno(std::string _cedula, std::string _nombre);
-
-    // Metodos para gestionar las notas dinamicamente
-    bool agregarNota(double nuevaNota); // Agrega una nota al arreglo si hay espacio
-    bool deshacerUltimaNota();          // Elimina la ultima nota agregada por error
-
-    // Metodos para obtener los datos (Getters)
-    std::string getCedula() const;
-    std::string getNombre() const;
+    // Métodos para las notas
+    void agregarNota(float nota);
+    void removerUltimaNota(); // Apoyo para la función deshacer (LIFO)
+    
+    // Método que ejecuta el polimorfismo
+    bool estaAprobado(); 
+    
+    // Getters
     int getCantidadNotas() const;
-    double getNota(int indice) const;
-
-    // Metodos para calcular el rendimiento (basado en las notas actuales)
-    double calcularPromedio() const;
-    std::string determinarEstado() const;
+    float getNota(int indice) const;
+    std::string getNombrePrograma() const { return programa->getTipo(); }
 };
 
 #endif
