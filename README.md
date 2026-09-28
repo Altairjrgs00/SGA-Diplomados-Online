@@ -10,8 +10,8 @@ Separé el repositorio en cuatro carpetas para mantener cada entrega ordenada:
 
 *   **`/Docs`**: Aquí guardo mis informes en PDF y el Diagrama de Clases UML.
 *   **`/Python`**: Codigo funcional del programa en lenguaje Python que guarda todo en archivos `.txt`.
-*   **`/Java`**: Código migrado a Java.
-*   **`/Cpp`**: Carpeta reservada para la optimización final del código en C++.
+*   **`/Java`**: Código migrado y funcional en Lenguaje Java.
+*   **`/Cpp`**: Código migrado y funcional en Lenguaje C++.
 
 
 **Estudiante:** Jose Gambarini 
